@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, request
+from flask import Blueprint, abort, request, jsonify
 from models.recording import Recording
 from models.user import User  # noqa: E501
 from services import user_service
@@ -7,7 +7,7 @@ import util
 users_endpoint = Blueprint('users_endpoint', __name__)
 
 @users_endpoint.route('/users', methods=['POST'])
-def add_user(body):  # noqa: E501
+def add_user():  # noqa: E501
     """Add a new user as experiment participant
 
      # noqa: E501
@@ -22,7 +22,13 @@ def add_user(body):  # noqa: E501
     print("test build pipeline")
     
     if is_valid(body):
-        return body
+        return jsonify({
+            "id": body.id,
+            "gender": {
+                "recording": body.gender.recording,
+                "timeToRecording": body.gender.time_to_recording
+            }
+        })
         result = user_service.add_user(body)
     else:
         abort(400, "Please provide all required attributes.")
