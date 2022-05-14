@@ -3,12 +3,17 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from flask_cors import CORS
 from controllers.users_controller import users_endpoint
+from controllers.recordings_controller import recordings_endpoint
 
 app = Flask(__name__)
 app.register_blueprint(users_endpoint)
+app.register_blueprint(recordings_endpoint)
 
 CORS(app)
-app.config.from_object("config.ProductionConfig")
+if app.config["ENV"] == "production":
+    app.config.from_object("config.ProductionConfig")
+else:
+    app.config.from_object("config.DevelopmentConfig")
 
 @app.route('/')
 def index():
