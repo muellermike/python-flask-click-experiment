@@ -22,4 +22,4 @@ def add_recording():  # noqa: E501
 
     recording_id = add_recording_to_exercise(body)
     
-    return recording_id
+    return jsonify(recording_id)

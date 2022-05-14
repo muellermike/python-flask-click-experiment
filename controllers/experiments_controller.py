@@ -1,6 +1,6 @@
 import connexion
 import six
-from flask import Blueprint, abort, request
+from flask import Blueprint, abort, request, jsonify
 from models.experiment import Experiment  # noqa: E501
 import util
 from services.exercise_service import get_next_random_exercise
@@ -26,7 +26,7 @@ def add_experiment():  # noqa: E501
     if not result:
         abort(404)
 
-    return result
+    return jsonify(result)
 
 @experiments_endpoint.route('/experiments/<experiment_id>/<user_id>/exercises/next', methods=['GET'])
 def get_next_exercise(experiment_id, user_id):  # noqa: E501
@@ -57,4 +57,4 @@ def get_next_exercise(experiment_id, user_id):  # noqa: E501
         "encodedString": result["EncodedString"]
     }
 
-    return exercise
+    return jsonify(exercise)

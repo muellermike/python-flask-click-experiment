@@ -20,19 +20,11 @@ def add_user():  # noqa: E501
     body = User.from_dict(request.get_json())  # noqa: E501
     
     if is_valid(body):
-        return jsonify({
-            "id": body.id,
-            "gender": {
-                "recording": body.gender.recording,
-                "timeToRecording": body.gender.time_to_recording
-            },
-            "db": current_app.config["DB_URI"]
-        })
         result = user_service.add_user(body)
     else:
         abort(400, "Please provide all required attributes.")
     
-    return result
+    return jsonify(result)
 
 def is_valid(user: User):
     """
