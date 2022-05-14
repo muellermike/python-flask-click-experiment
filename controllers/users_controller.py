@@ -1,4 +1,4 @@
-from flask import Blueprint, abort, request, jsonify
+from flask import Blueprint, abort, current_app, request, jsonify, current_app
 from models.recording import Recording
 from models.user import User  # noqa: E501
 from services import user_service
@@ -18,8 +18,6 @@ def add_user():  # noqa: E501
     :rtype: None
     """
     body = User.from_dict(request.get_json())  # noqa: E501
-
-    print("test build pipeline")
     
     if is_valid(body):
         return jsonify({
@@ -27,7 +25,8 @@ def add_user():  # noqa: E501
             "gender": {
                 "recording": body.gender.recording,
                 "timeToRecording": body.gender.time_to_recording
-            }
+            },
+            "db": current_app.config["DB_URI"]
         })
         result = user_service.add_user(body)
     else:
