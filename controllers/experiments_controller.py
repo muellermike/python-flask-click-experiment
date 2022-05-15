@@ -1,4 +1,3 @@
-import connexion
 import six
 from flask import Blueprint, abort, request, jsonify
 from models.experiment import Experiment  # noqa: E501
