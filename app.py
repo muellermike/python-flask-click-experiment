@@ -1,7 +1,21 @@
+import os
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
-app = Flask(__name__)
+from flask_cors import CORS
+from controllers.users_controller import users_endpoint
+from controllers.recordings_controller import recordings_endpoint
+from controllers.experiments_controller import experiments_endpoint
 
+app = Flask(__name__)
+app.register_blueprint(users_endpoint)
+app.register_blueprint(recordings_endpoint)
+app.register_blueprint(experiments_endpoint)
+
+CORS(app)
+if app.config["ENV"] == "production":
+    app.config.from_object("config.ProductionConfig")
+else:
+    app.config.from_object("config.DevelopmentConfig")
 
 @app.route('/')
 def index():
@@ -26,4 +40,4 @@ def hello():
 
 
 if __name__ == '__main__':
-   app.run()
+    app.run()

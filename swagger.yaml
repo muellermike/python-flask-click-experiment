@@ -1,0 +1,236 @@
+---
+swagger: "2.0"
+info:
+  description: "This is a server to access ressources for the NLP experiment application."
+  version: "1.0.0"
+  title: "NLP Experiment API"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "mike.mueller@student.unisg.ch"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "not-yet-defined.fc-eschlikon.ch"
+basePath: "/v1"
+tags:
+- name: "users"
+  description: "A user who participates in the experiment"
+- name: "experiments"
+  description: "An experiment which belongs to a user and includes several questions"
+- name: "recordings"
+  description: "A recording stores the answer of a participant"
+schemes:
+- "https"
+- "http"
+paths:
+  /users:
+    post:
+      tags:
+      - "users"
+      summary: "Add a new user as experiment participant"
+      description: ""
+      operationId: "add_user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be added as experiment participant."
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      security:
+      - api_key: []
+      responses:
+        "200":
+          description: "User has been allocated."
+        "401":
+          description: "API key is missing or invalid."
+      x-swagger-router-controller: "swagger_server.controllers.users_controller"
+  /experiments:
+    post:
+      tags:
+      - "experiments"
+      summary: "Add a new experiment to a user"
+      description: ""
+      operationId: "add_experiment"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Experiment object that needs to be added to a user."
+        required: true
+        schema:
+          $ref: "#/definitions/Experiment"
+      security:
+      - api_key: []
+      responses:
+        "200":
+          description: "Experiment has been created."
+        "401":
+          description: "API key is missing or invalid."
+      x-swagger-router-controller: "swagger_server.controllers.experiments_controller"
+  /experiments/{experimentId}/{userId}/exercises/next:
+    get:
+      tags:
+      - "experiments"
+      summary: "Get next exercise for this specific experiment of this user"
+      description: ""
+      operationId: "get_next_exercise"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "experimentId"
+        in: "path"
+        description: "Experiment ID to retrieve"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "userId"
+        in: "path"
+        description: "User ID to retrieve"
+        required: true
+        type: "integer"
+        format: "int64"
+      security:
+      - api_key: []
+      responses:
+        "200":
+          description: "Exercise was loaded."
+          schema:
+            $ref: "#/definitions/Exercise"
+        "401":
+          description: "API key is missing or invalid."
+      x-swagger-router-controller: "swagger_server.controllers.experiments_controller"
+  /recordings:
+    put:
+      tags:
+      - "recordings"
+      summary: "Add a new recording to an experiment exercise"
+      description: ""
+      operationId: "add_recording"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Recording object that needs to be added to a experiment exercise."
+        required: true
+        schema:
+          $ref: "#/definitions/Recording"
+      security:
+      - api_key: []
+      responses:
+        "200":
+          description: "Recording has been added."
+        "401":
+          description: "API key is missing or invalid."
+      x-swagger-router-controller: "swagger_server.controllers.recordings_controller"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "X-API-KEY"
+    in: "header"
+    x-apikeyInfoFunc: "swagger_server.controllers.authorization_controller.check_api_key"
+definitions:
+  User:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "string"
+      gender:
+        $ref: "#/definitions/Recording"
+      age:
+        $ref: "#/definitions/Recording"
+      uniqueId:
+        type: "integer"
+        format: "int64"
+    example:
+      gender: "{}"
+      id: 0
+      age: "{}"
+  Experiment:
+    type: "object"
+    required:
+    - "start"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      start:
+        type: "string"
+        format: "date-time"
+      end:
+        type: "string"
+        format: "date-time"
+      user:
+        type: "integer"
+        format: "int64"
+    example:
+      start: "2000-01-23T04:56:07.000+00:00"
+      end: "2000-01-23T04:56:07.000+00:00"
+      id: 0
+      user: 6
+  Exercise:
+    type: "object"
+    required:
+    - "id"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      question:
+        type: "string"
+        format: "string"
+      mimetype:
+        type: "string"
+        format: "string"
+      encodedString:
+        type: "string"
+        format: "string"
+    example:
+      question: "question"
+      encodedString: "encodedString"
+      mimetype: "mimetype"
+      id: 0
+  Recording:
+    type: "object"
+    required:
+    - "recording"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      recording:
+        type: "string"
+        format: "string"
+      timeToRecording:
+        type: "integer"
+        format: "int64"
+      experimentId:
+        type: "integer"
+        format: "int64"
+      userId:
+        type: "integer"
+        format: "int64"
+      exerciseId:
+        type: "integer"
+        format: "int64"
+    example:
+      timeToRecording: 6
+      recording: "{}"
+      id: 0
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
