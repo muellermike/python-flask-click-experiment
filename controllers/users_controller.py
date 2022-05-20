@@ -1,5 +1,4 @@
-from flask import Blueprint, abort, current_app, request, jsonify, current_app
-from models.recording import Recording
+from flask import Blueprint, abort, request, jsonify
 from models.user import User  # noqa: E501
 from services import user_service
 import util
@@ -31,7 +30,7 @@ def is_valid(user: User):
     Checks all the params whether they are all available or not
     """
     isValid = False
-    if user.id and user.gender.recording and user.gender.time_to_recording and user.age.recording and user.age.time_to_recording:
+    if user.id and user.gender and user.age:
         isValid = True
 
     return isValid
