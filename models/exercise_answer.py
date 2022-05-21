@@ -32,7 +32,7 @@ class ExerciseAnswer(Model):
 
         self.attribute_map = {
             'id': 'id',
-            'recording': 'recording',
+            'answer': 'answer',
             'experiment_id': 'experimentId',
             'user_id': 'userId',
             'exercise_id': 'exerciseId'
