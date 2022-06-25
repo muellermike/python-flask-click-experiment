@@ -1,15 +1,15 @@
 import random
 from datalayers.db import execute
+from models.exercise_answer import ExerciseAnswer
 from models.experiment import Experiment
-from models.recording import Recording
 
 def store_experiment(experiment: Experiment):
     """
     Store experiment with the information into the database
     """
-    sql = "INSERT INTO Experiment (UserFK, Start) VALUES (%s, %s)"
+    sql = "INSERT INTO Experiment (UserFK, Start, ImageTime) VALUES (%s, %s, %s)"
 
-    experiment_id = execute(sql, (experiment.user, experiment.start), "INSERT")
+    experiment_id = execute(sql, (experiment.user, experiment.start, experiment.image_time), "INSERT")
     
     return experiment_id
 
@@ -29,15 +29,15 @@ def store_experiment_exercises(exercises, experiment: Experiment):
 
     return True
 
-def update_experiment_exercise(recording: Recording):
+def update_experiment_exercise(exercise: ExerciseAnswer):
     """
-    Updates the experiment exercise with the recording foreign key
+    Updates the experiment exercise with the answer
     """
     # sql statement to update a row
-    sql = "UPDATE ExperimentExercise SET RecordingFK = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
+    sql = "UPDATE ExperimentExercise SET Answer = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
 
     # execute the UPDATE statement
-    execute(sql, (recording.id, recording.experiment_id, recording.exercise_id), "UPDATE")
+    execute(sql, (exercise.answer, exercise.experiment_id, exercise.exercise_id), "UPDATE")
 
     return True
 

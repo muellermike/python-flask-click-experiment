@@ -6,7 +6,6 @@ from typing import List, Dict  # noqa: F401
 
 from models.base_model_ import Model
 import util
-from models.recording import Recording
 
 
 class User(Model):
@@ -15,7 +14,7 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: str=None, unique_id: int=None, gender: Recording=None, age: Recording=None):  # noqa: E501
+    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param id: The id of this User.  # noqa: E501
@@ -23,13 +22,13 @@ class User(Model):
         :param gender: The gender of this User.  # noqa: E501
         :type gender: string
         :param age: The age of this User.  # noqa: E501
-        :type age: string
+        :type age: int
         """
         self.swagger_types = {
             'id': str,
             'unique_id': int,
-            'gender': Recording,
-            'age': Recording
+            'gender': str,
+            'age': int
         }
 
         self.attribute_map = {
@@ -100,7 +99,7 @@ class User(Model):
         self._unique_id = unique_id
 
     @property
-    def gender(self) -> Recording:
+    def gender(self) -> str:
         """Gets the gender of this User.
 
 
@@ -110,7 +109,7 @@ class User(Model):
         return self._gender
 
     @gender.setter
-    def gender(self, gender: Recording):
+    def gender(self, gender: str):
         """Sets the gender of this User.
 
 
@@ -121,22 +120,22 @@ class User(Model):
         self._gender = gender
 
     @property
-    def age(self) -> Recording:
+    def age(self) -> int:
         """Gets the age of this User.
 
 
         :return: The age of this User.
-        :rtype: string
+        :rtype: int
         """
         return self._age
 
     @age.setter
-    def age(self, age: Recording):
+    def age(self, age: int):
         """Sets the age of this User.
 
 
         :param age: The age of this User.
-        :type age: object
+        :type age: int
         """
 
         self._age = age

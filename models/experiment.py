@@ -15,7 +15,7 @@ class Experiment(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: int=None, start: datetime=None, end: datetime=None, user: int=None):  # noqa: E501
+    def __init__(self, id: int=None, start: datetime=None, end: datetime=None, user: int=None, image_time: str=None):  # noqa: E501
         """Experiment - a model defined in Swagger
 
         :param id: The id of this Experiment.  # noqa: E501
@@ -31,20 +31,23 @@ class Experiment(Model):
             'id': int,
             'start': datetime,
             'end': datetime,
-            'user': int
+            'user': int,
+            'image_time': str
         }
 
         self.attribute_map = {
             'id': 'id',
             'start': 'start',
             'end': 'end',
-            'user': 'user'
+            'user': 'user',
+            'image_time': 'imageTime'
         }
 
         self._id = id
         self._start = start
         self._end = end
         self._user = user
+        self._image_time = image_time
 
     @classmethod
     def from_dict(cls, dikt) -> 'Experiment':
@@ -142,3 +145,24 @@ class Experiment(Model):
         """
 
         self._user = user
+
+    @property
+    def image_time(self) -> str:
+        """Gets the image_time of this Experiment.
+
+
+        :return: The image_time of this Experiment.
+        :rtype: str
+        """
+        return self._image_time
+
+    @image_time.setter
+    def image_time(self, image_time: str):
+        """Sets the image_time of this Experiment.
+
+
+        :param user: The image_time of this Experiment.
+        :type user: str
+        """
+
+        self._image_time = image_time

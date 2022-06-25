@@ -1,5 +1,6 @@
 from datalayers.exercise_datalayer import load_next_random_exercise, load_random_exercises
-from datalayers.experiment_datalayer import load_user_experiment
+from datalayers.experiment_datalayer import load_experiment_exercise, load_user_experiment, update_experiment_exercise
+from models.exercise_answer import ExerciseAnswer
 from models.user import User
 
 def get_exercises(answer: str, number_of_exercises: int):
@@ -32,3 +33,26 @@ def get_next_random_exercise(experimend_id: int, user_id: int):
             return ()
 
     return exercise
+
+def update_exercise_answer(exercise: ExerciseAnswer):
+    """
+    checks all parameter and stores the exercise answer then
+    """
+    # before storing the recording it is checked, whether this user_experiment exists.
+    user_ex = load_user_experiment(exercise.experiment_id, exercise.user_id)
+    
+    if user_ex is None:
+        # if the experiment for the user doesn't exist, return None
+        return None
+    
+    # check that this exercise has not been answered yet
+    ex = load_experiment_exercise(exercise.experiment_id, exercise.exercise_id)
+
+    # if exercise hasn't been found or RecordingFK is already filled, than return None
+    if not ex or ex[0]["Answer"] is not None:
+        return None
+
+    # set the recording foreign key to the current experiment exercise
+    hasUpdated = update_experiment_exercise(exercise)
+
+    return hasUpdated
