@@ -14,7 +14,7 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None):  # noqa: E501
+    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None, time_to_age_entry: int=None, time_to_gender_click: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param id: The id of this User.  # noqa: E501
@@ -28,20 +28,26 @@ class User(Model):
             'id': str,
             'unique_id': int,
             'gender': str,
-            'age': int
+            'age': int,
+            'time_to_age_entry': int,
+            'time_to_gender_click': int
         }
 
         self.attribute_map = {
             'id': 'id',
             'unique_id': 'uniqueId',
             'gender': 'gender',
-            'age': 'age'
+            'age': 'age',
+            'time_to_age_entry': 'timeToAgeEntry',
+            'time_to_gender_click': 'timeToGenderClick'
         }
 
         self._id = id
         self._unique_id = unique_id
         self._gender = gender
-        self._age = age
+        self._age = age,
+        self._time_to_age_entry = time_to_age_entry
+        self._time_to_gender_click = time_to_gender_click
 
     @classmethod
     def from_dict(cls, dikt) -> 'User':
@@ -139,3 +145,45 @@ class User(Model):
         """
 
         self._age = age
+
+    @property
+    def time_to_age_entry(self) -> int:
+        """Gets the time to age entry of this User.
+
+
+        :return: The time to age entry of this User.
+        :rtype: int
+        """
+        return self._time_to_age_entry
+
+    @time_to_age_entry.setter
+    def time_to_age_entry(self, time_to_age_entry: int):
+        """Sets the time_to_age_entry of this User.
+
+
+        :param age: The time_to_age_entry of this User.
+        :type age: int
+        """
+
+        self._time_to_age_entry = time_to_age_entry
+
+    @property
+    def time_to_gender_click(self) -> int:
+        """Gets the time to gender click of this User.
+
+
+        :return: The time to gender click of this User.
+        :rtype: int
+        """
+        return self._time_to_gender_click
+
+    @time_to_gender_click.setter
+    def time_to_gender_click(self, time_to_gender_click: int):
+        """Sets the time_to_gender_click of this User.
+
+
+        :param age: The time_to_gender_click of this User.
+        :type age: int
+        """
+
+        self._time_to_gender_click = time_to_gender_click

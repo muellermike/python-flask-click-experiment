@@ -7,9 +7,9 @@ def store_user(user: User):
     """
 
     # INSERT Statement for the insertion of a User.
-    sql = "INSERT INTO User (ID, UniParkID, Gender, Age) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO User (ID, UniParkID, Gender, Age, TimeToGenderClick, TimeToAgeEntry) VALUES (%s, %s, %s, %s, %s, %s)"
 
-    inserted_user = execute(sql, (user.id, user.id, user.gender, int(user.age)), "INSERT")
+    inserted_user = execute(sql, (user.id, user.id, user.gender, int(user.age), int(user.time_to_gender_click), int(user.time_to_age_entry)), "INSERT")
     
     return inserted_user
 
