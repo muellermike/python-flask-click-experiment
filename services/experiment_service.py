@@ -1,5 +1,5 @@
 from flask import current_app
-from datalayers.experiment_datalayer import store_experiment, store_experiment_exercises
+from datalayers.experiment_datalayer import load_user_experiment, store_experiment, store_experiment_exercises, update_experiment_endtime
 from models.experiment import Experiment
 from services.exercise_service import get_exercises
 from services.user_service import find_user_by_id
@@ -26,4 +26,22 @@ def create_experiment(experiment: Experiment):
 
     store_experiment_exercises(lefties + righties, experiment)
     
+    return result
+
+def update_experiment(experiment: Experiment):
+    """
+    implements the logic to update an existing experiment. This means that first it is checked whether the user exists and has this experiment.
+    After that all allowed updated are executed.
+    """
+    # first load the experiment for this user to check whether it really exists
+    usr_exp = load_user_experiment(experiment.id, experiment.user)
+    if not usr_exp:
+        return None
+    
+    if usr_exp[0]["End"] is not None:
+        return False
+
+    # if it passed until now, we are sure that this experiment with this userid really exists
+    result = update_experiment_endtime(experiment)
+
     return result

@@ -41,6 +41,18 @@ def update_experiment_exercise(exercise: ExerciseAnswer):
 
     return True
 
+def update_experiment_endtime(experiment: Experiment):
+    """
+    Updates the experiment endtime
+    """
+    # sql statement to update experiment endtime
+    sql = "UPDATE Experiment SET End = %s WHERE PK = %s AND UserFK = %s"
+
+    # execute the UPDATE statement
+    execute(sql, (experiment.end, experiment.id, experiment.user), "UPDATE")
+
+    return True
+
 def load_user_experiment(experiment_id: int, user_id: int):
     """
     Loads a specific experiment for a specific user
