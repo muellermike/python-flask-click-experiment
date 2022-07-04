@@ -31,6 +31,7 @@ def execute(sql, params, statement):
                 conn.commit()
     finally:
         conn.close()
+        conn = None
     
     return result
 
