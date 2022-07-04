@@ -1,6 +1,7 @@
 # coding: utf-8
 
 from __future__ import absolute_import
+from datetime import datetime
 
 from typing import List, Dict  # noqa: F401
 
@@ -10,7 +11,7 @@ import util
 
 class ExerciseAnswer(Model):
 
-    def __init__(self, answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None):  # noqa: E501
+    def __init__(self, answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None, time: datetime=None):  # noqa: E501
         """ExerciseAnswer - a model defined in Swagger
 
         :param answer: The answer of this Experiment Exercise.  # noqa: E501
@@ -27,7 +28,8 @@ class ExerciseAnswer(Model):
             'answer': str,
             'experiment_id': int,
             'user_id': int,
-            'exercise_id': int
+            'exercise_id': int,
+            'time': datetime
         }
 
         self.attribute_map = {
@@ -35,7 +37,8 @@ class ExerciseAnswer(Model):
             'answer': 'answer',
             'experiment_id': 'experimentId',
             'user_id': 'userId',
-            'exercise_id': 'exerciseId'
+            'exercise_id': 'exerciseId',
+            'time': 'time'
         }
 
         self._id = id
@@ -43,6 +46,7 @@ class ExerciseAnswer(Model):
         self._experiment_id = experiment_id
         self._user_id = user_id
         self._exercise_id = exercise_id
+        self._time = time
 
     @classmethod
     def from_dict(cls, dikt) -> 'ExerciseAnswer':
@@ -140,3 +144,24 @@ class ExerciseAnswer(Model):
         """
 
         self._exercise_id = exercise_id
+
+    @property
+    def time(self) -> datetime:
+        """Gets the time of this ExerciseAnswer.
+
+
+        :return: The time of this ExerciseAnswer.
+        :rtype: datetime
+        """
+        return self._time
+
+    @time.setter
+    def time(self, time: datetime):
+        """Sets the time of this ExerciseAnswer.
+
+
+        :param end: The time of this ExerciseAnswer.
+        :type time: datetime
+        """
+
+        self._time = time
