@@ -11,7 +11,7 @@ import util
 
 class ExerciseAnswer(Model):
 
-    def __init__(self, answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None, time: datetime=None):  # noqa: E501
+    def __init__(self, answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None, time: datetime=None, time_to_click: str=None, time_to_submit: str=None):  # noqa: E501
         """ExerciseAnswer - a model defined in Swagger
 
         :param answer: The answer of this Experiment Exercise.  # noqa: E501
@@ -29,7 +29,9 @@ class ExerciseAnswer(Model):
             'experiment_id': int,
             'user_id': int,
             'exercise_id': int,
-            'time': datetime
+            'time': datetime,
+            'time_to_click': str,
+            'time_to_submit': str
         }
 
         self.attribute_map = {
@@ -38,7 +40,9 @@ class ExerciseAnswer(Model):
             'experiment_id': 'experimentId',
             'user_id': 'userId',
             'exercise_id': 'exerciseId',
-            'time': 'time'
+            'time': 'time',
+            'time_to_click': 'timeToClick',
+            'time_to_submit': 'timeToSubmit'
         }
 
         self._id = id
@@ -47,6 +51,8 @@ class ExerciseAnswer(Model):
         self._user_id = user_id
         self._exercise_id = exercise_id
         self._time = time
+        self._time_to_click = time_to_click
+        self._time_to_submit = time_to_submit
 
     @classmethod
     def from_dict(cls, dikt) -> 'ExerciseAnswer':
@@ -165,3 +171,45 @@ class ExerciseAnswer(Model):
         """
 
         self._time = time
+
+    @property
+    def time_to_click(self) -> str:
+        """Gets the time to click of this ExerciseAnswer.
+
+
+        :return: The time to click of this ExerciseAnswer.
+        :rtype: str
+        """
+        return self._time_to_click
+
+    @time_to_click.setter
+    def time_to_click(self, time_to_click: str):
+        """Sets the time to click of this ExerciseAnswer.
+
+
+        :param time to click: The time to click of this ExerciseAnswer.
+        :type time to click: str
+        """
+
+        self._time_to_click = time_to_click
+
+    @property
+    def time_to_submit(self) -> str:
+        """Gets the time to submit of this ExerciseAnswer.
+
+
+        :return: The time to submit of this ExerciseAnswer.
+        :rtype: str
+        """
+        return self._time_to_submit
+
+    @time_to_submit.setter
+    def time_to_submit(self, time_to_submit: str):
+        """Sets the time to submit of this ExerciseAnswer.
+
+
+        :param time to submit: The time to submit of this ExerciseAnswer.
+        :type time to submit: str
+        """
+
+        self._time_to_submit = time_to_submit
