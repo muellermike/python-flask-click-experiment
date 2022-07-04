@@ -14,7 +14,7 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None, time_to_age_entry: int=None, time_to_gender_click: int=None):  # noqa: E501
+    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None, time_to_age_entry: int=None, time_to_gender_click: int=None, time_to_submit: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param id: The id of this User.  # noqa: E501
@@ -30,7 +30,8 @@ class User(Model):
             'gender': str,
             'age': int,
             'time_to_age_entry': int,
-            'time_to_gender_click': int
+            'time_to_gender_click': int,
+            'time_to_submit': int
         }
 
         self.attribute_map = {
@@ -39,7 +40,8 @@ class User(Model):
             'gender': 'gender',
             'age': 'age',
             'time_to_age_entry': 'timeToAgeEntry',
-            'time_to_gender_click': 'timeToGenderClick'
+            'time_to_gender_click': 'timeToGenderClick',
+            'time_to_submit': 'timeToSubmit'
         }
 
         self._id = id
@@ -48,6 +50,7 @@ class User(Model):
         self._age = age,
         self._time_to_age_entry = time_to_age_entry
         self._time_to_gender_click = time_to_gender_click
+        self._time_to_submit = time_to_submit
 
     @classmethod
     def from_dict(cls, dikt) -> 'User':
@@ -187,3 +190,24 @@ class User(Model):
         """
 
         self._time_to_gender_click = time_to_gender_click
+
+    @property
+    def time_to_submit(self) -> int:
+        """Gets the time to submit of this User.
+
+
+        :return: The time to submit of this User.
+        :rtype: int
+        """
+        return self._time_to_submit
+
+    @time_to_submit.setter
+    def time_to_submit(self, time_to_submit: int):
+        """Sets the time_to_submit of this User.
+
+
+        :param age: The time_to_submit of this User.
+        :type age: int
+        """
+
+        self._time_to_submit = time_to_submit
