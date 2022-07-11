@@ -46,7 +46,7 @@ def update_experiment_endtime(experiment: Experiment):
     Updates the experiment endtime
     """
     # sql statement to update experiment endtime
-    sql = "UPDATE Experiment SET End = %s WHERE PK = %s AND UserFK = %s"
+    sql = "UPDATE Experiment SET End = %s WHERE PK = %s AND UserFK = %s AND End IS NULL"
 
     # execute the UPDATE statement
     execute(sql, (experiment.end, experiment.id, experiment.user), "UPDATE")

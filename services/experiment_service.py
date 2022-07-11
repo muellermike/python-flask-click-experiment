@@ -33,15 +33,7 @@ def update_experiment(experiment: Experiment):
     implements the logic to update an existing experiment. This means that first it is checked whether the user exists and has this experiment.
     After that all allowed updated are executed.
     """
-    # first load the experiment for this user to check whether it really exists
-    usr_exp = load_user_experiment(experiment.id, experiment.user)
-    if not usr_exp:
-        return None
-    
-    if usr_exp[0]["End"] is not None:
-        return False
-
-    # if it passed until now, we are sure that this experiment with this userid really exists
+    # UPDATE endtime of experiment when the endtime is not set yet (logic in SQL Statement)
     result = update_experiment_endtime(experiment)
 
     return result

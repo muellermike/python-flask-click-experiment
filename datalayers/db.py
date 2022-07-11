@@ -2,18 +2,20 @@ from distutils.command.config import config
 from flask import current_app
 import pymysql.cursors
 
-conn = None
-
 def execute(sql, params, statement):
     """
     Runs an sql command on the database and returns result if there is one.
     """
-    global conn
 
     result = None
 
-    if (conn is None):
-        conn = set_db_connection()
+    conn = pymysql.connect(host = current_app.config["DB_URI"],
+                            port = 3306,
+                            user = current_app.config["DB_USER"],
+                            password = current_app.config["DB_PW"],
+                            db = current_app.config["DB_NAME"],
+                            charset = "utf8mb4",
+                            cursorclass = pymysql.cursors.DictCursor)
 
     try:
         with conn.cursor() as cursor:
@@ -31,7 +33,6 @@ def execute(sql, params, statement):
                 conn.commit()
     finally:
         conn.close()
-        conn = None
     
     return result
 
