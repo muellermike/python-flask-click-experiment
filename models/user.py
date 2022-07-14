@@ -14,7 +14,7 @@ class User(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: str=None, unique_id: int=None, gender: str=None, age: int=None, time_to_age_entry: int=None, time_to_gender_click: int=None, time_to_submit: int=None):  # noqa: E501
+    def __init__(self, id: str=None, unique_id: int=None):  # noqa: E501
         """User - a model defined in Swagger
 
         :param id: The id of this User.  # noqa: E501
@@ -26,31 +26,16 @@ class User(Model):
         """
         self.swagger_types = {
             'id': str,
-            'unique_id': int,
-            'gender': str,
-            'age': int,
-            'time_to_age_entry': int,
-            'time_to_gender_click': int,
-            'time_to_submit': int
+            'unique_id': int
         }
 
         self.attribute_map = {
             'id': 'id',
             'unique_id': 'uniqueId',
-            'gender': 'gender',
-            'age': 'age',
-            'time_to_age_entry': 'timeToAgeEntry',
-            'time_to_gender_click': 'timeToGenderClick',
-            'time_to_submit': 'timeToSubmit'
         }
 
         self._id = id
         self._unique_id = unique_id
-        self._gender = gender
-        self._age = age,
-        self._time_to_age_entry = time_to_age_entry
-        self._time_to_gender_click = time_to_gender_click
-        self._time_to_submit = time_to_submit
 
     @classmethod
     def from_dict(cls, dikt) -> 'User':
@@ -106,108 +91,3 @@ class User(Model):
         """
 
         self._unique_id = unique_id
-
-    @property
-    def gender(self) -> str:
-        """Gets the gender of this User.
-
-
-        :return: The gender of this User.
-        :rtype: string
-        """
-        return self._gender
-
-    @gender.setter
-    def gender(self, gender: str):
-        """Sets the gender of this User.
-
-
-        :param gender: The gender of this User.
-        :type gender: string
-        """
-
-        self._gender = gender
-
-    @property
-    def age(self) -> int:
-        """Gets the age of this User.
-
-
-        :return: The age of this User.
-        :rtype: int
-        """
-        return self._age
-
-    @age.setter
-    def age(self, age: int):
-        """Sets the age of this User.
-
-
-        :param age: The age of this User.
-        :type age: int
-        """
-
-        self._age = age
-
-    @property
-    def time_to_age_entry(self) -> int:
-        """Gets the time to age entry of this User.
-
-
-        :return: The time to age entry of this User.
-        :rtype: int
-        """
-        return self._time_to_age_entry
-
-    @time_to_age_entry.setter
-    def time_to_age_entry(self, time_to_age_entry: int):
-        """Sets the time_to_age_entry of this User.
-
-
-        :param age: The time_to_age_entry of this User.
-        :type age: int
-        """
-
-        self._time_to_age_entry = time_to_age_entry
-
-    @property
-    def time_to_gender_click(self) -> int:
-        """Gets the time to gender click of this User.
-
-
-        :return: The time to gender click of this User.
-        :rtype: int
-        """
-        return self._time_to_gender_click
-
-    @time_to_gender_click.setter
-    def time_to_gender_click(self, time_to_gender_click: int):
-        """Sets the time_to_gender_click of this User.
-
-
-        :param age: The time_to_gender_click of this User.
-        :type age: int
-        """
-
-        self._time_to_gender_click = time_to_gender_click
-
-    @property
-    def time_to_submit(self) -> int:
-        """Gets the time to submit of this User.
-
-
-        :return: The time to submit of this User.
-        :rtype: int
-        """
-        return self._time_to_submit
-
-    @time_to_submit.setter
-    def time_to_submit(self, time_to_submit: int):
-        """Sets the time_to_submit of this User.
-
-
-        :param age: The time_to_submit of this User.
-        :type age: int
-        """
-
-        self._time_to_submit = time_to_submit

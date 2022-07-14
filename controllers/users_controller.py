@@ -30,7 +30,7 @@ def is_valid(user: User):
     Checks all the params whether they are all available or not
     """
     isValid = False
-    if user.id and user.gender and user.age:
+    if user.id:
         isValid = True
 
     return isValid

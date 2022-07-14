@@ -20,6 +20,7 @@ def add_experiment():  # noqa: E501
 
     :rtype: None
     """
+    print(request.get_json())
     body = Experiment.from_dict(request.get_json())  # noqa: E501
     
     result = create_experiment(body)
