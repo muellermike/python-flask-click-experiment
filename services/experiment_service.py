@@ -14,7 +14,8 @@ def create_experiment(experiment: Experiment):
         return None
     
     # load a number of exercises which have the correct answer left
-    lefties = get_exercises("left", current_app.config["NUMBER_OF_EXERCISES"])
+    fixed_numbers = [{"PK": 3}, { "PK": 7}, {"PK": 8}]
+    lefties = get_exercises("left", (current_app.config["NUMBER_OF_EXERCISES"] - len(fixed_numbers)))  + fixed_numbers
     # load a number of exercises which have the correct answer right
     righties = get_exercises("right", current_app.config["NUMBER_OF_EXERCISES"])
 

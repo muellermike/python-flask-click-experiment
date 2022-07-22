@@ -17,8 +17,11 @@ def load_random_exercises(answer: str, number_of_exercises: int):
     """
     Load all exercises which have the correct answer provided as parameter
     """
-    # load n exercises which have the answer provided as parameter in a random order
-    sql = "SELECT PK FROM Exercise WHERE CorrectAnswer = %s ORDER BY RAND() LIMIT %s"
+    if (answer == "left"):
+        sql = "SELECT PK FROM Exercise WHERE CorrectAnswer = %s AND PK NOT IN (3,7,8) ORDER BY RAND() LIMIT %s"
+    else:
+        # load n exercises which have the answer provided as parameter in a random order
+        sql = "SELECT PK FROM Exercise WHERE CorrectAnswer = %s ORDER BY RAND() LIMIT %s"
 
     loaded_exercises = execute(sql, (answer, int(number_of_exercises)), "SELECT")
     
