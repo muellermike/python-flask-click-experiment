@@ -35,6 +35,13 @@ def update_experiment_exercise(exercise: ExerciseAnswer):
     """
 
     if exercise.full_text_answer is not None:
+        if exercise.full_text_answer.lower() == "there are more dots on the right side":
+            exercise.answer = "right"
+        elif exercise.full_text_answer.lower() == "there are more dots on the left side":
+            exercise.answer = "left"
+        else:
+            exercise.answer = "unclear"
+        
         sql = "UPDATE ExperimentExercise SET Answer = %s, FullTextAnswer = %s, AnswerStoredTimestamp = %s, TimeToClick = %s, TimeToSubmit = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
         execute(sql, (exercise.answer, exercise.full_text_answer, exercise.time, exercise.time_to_click, exercise.time_to_submit, exercise.experiment_id, exercise.exercise_id), "UPDATE")
     else:
