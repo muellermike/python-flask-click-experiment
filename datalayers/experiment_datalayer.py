@@ -33,11 +33,13 @@ def update_experiment_exercise(exercise: ExerciseAnswer):
     """
     Updates the experiment exercise with the answer
     """
-    # sql statement to update a row
-    sql = "UPDATE ExperimentExercise SET Answer = %s, AnswerStoredTimestamp = %s, TimeToClick = %s, TimeToSubmit = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
 
-    # execute the UPDATE statement
-    execute(sql, (exercise.answer, exercise.time, exercise.time_to_click, exercise.time_to_submit, exercise.experiment_id, exercise.exercise_id), "UPDATE")
+    if exercise.full_text_answer is not None:
+        sql = "UPDATE ExperimentExercise SET Answer = %s, FullTextAnswer = %s, AnswerStoredTimestamp = %s, TimeToClick = %s, TimeToSubmit = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
+        execute(sql, (exercise.answer, exercise.full_text_answer, exercise.time, exercise.time_to_click, exercise.time_to_submit, exercise.experiment_id, exercise.exercise_id), "UPDATE")
+    else:
+        sql = "UPDATE ExperimentExercise SET Answer = %s, AnswerStoredTimestamp = %s, TimeToClick = %s, TimeToSubmit = %s WHERE ExperimentFK = %s AND ExerciseFK = %s"
+        execute(sql, (exercise.answer, exercise.time, exercise.time_to_click, exercise.time_to_submit, exercise.experiment_id, exercise.exercise_id), "UPDATE")
 
     return True
 

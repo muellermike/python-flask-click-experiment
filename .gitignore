@@ -130,3 +130,6 @@ dmypy.json
 
 # Configuration
 config.py
+
+# Database
+utils/db/

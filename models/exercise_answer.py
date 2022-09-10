@@ -11,7 +11,7 @@ import util
 
 class ExerciseAnswer(Model):
 
-    def __init__(self, answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None, time: datetime=None, time_to_click: int=None, time_to_submit: int=None):  # noqa: E501
+    def __init__(self, answer: str=None, full_text_answer: str=None, experiment_id: int=None, user_id: int=None, exercise_id: int=None, time: datetime=None, time_to_click: int=None, time_to_submit: int=None):  # noqa: E501
         """ExerciseAnswer - a model defined in Swagger
 
         :param answer: The answer of this Experiment Exercise.  # noqa: E501
@@ -24,8 +24,8 @@ class ExerciseAnswer(Model):
         :type exercise_id: int
         """
         self.swagger_types = {
-            'id': int,
             'answer': str,
+            'full_text_answer': str,
             'experiment_id': int,
             'user_id': int,
             'exercise_id': int,
@@ -35,8 +35,8 @@ class ExerciseAnswer(Model):
         }
 
         self.attribute_map = {
-            'id': 'id',
             'answer': 'answer',
+            'full_text_answer': 'fullTextAnswer',
             'experiment_id': 'experimentId',
             'user_id': 'userId',
             'exercise_id': 'exerciseId',
@@ -45,8 +45,8 @@ class ExerciseAnswer(Model):
             'time_to_submit': 'timeToSubmit'
         }
 
-        self._id = id
         self._answer = answer
+        self._full_text_answer = full_text_answer
         self._experiment_id = experiment_id
         self._user_id = user_id
         self._exercise_id = exercise_id
@@ -87,6 +87,27 @@ class ExerciseAnswer(Model):
             raise ValueError("Invalid value for `answer`, must not be `None`")  # noqa: E501
 
         self._answer = answer
+
+    @property
+    def full_text_answer(self) -> str:
+        """Gets the full_text_answer of this ExerciseAnswer.
+
+
+        :return: The full_text_answer of this ExerciseAnswer.
+        :rtype: str
+        """
+        return self._full_text_answer
+
+    @full_text_answer.setter
+    def full_text_answer(self, full_text_answer: str):
+        """Sets the full_text_answer of this ExerciseAnswer.
+
+
+        :param answer: The full_text_answer of this ExerciseAnswer.
+        :type answer: str
+        """
+
+        self._full_text_answer = full_text_answer
 
     @property
     def experiment_id(self) -> int:

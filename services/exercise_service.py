@@ -49,7 +49,7 @@ def update_exercise_answer(exercise: ExerciseAnswer):
     ex = load_experiment_exercise(exercise.experiment_id, exercise.exercise_id)
 
     # if exercise hasn't been found or RecordingFK is already filled, than return None
-    if not ex or ex[0]["Answer"] is not None:
+    if not ex or ex[0]["Answer"] is not None or ex[0]["FullTextAnswer"] is not None:
         return None
 
     # set the recording foreign key to the current experiment exercise
