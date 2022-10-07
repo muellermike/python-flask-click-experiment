@@ -7,9 +7,9 @@ def store_experiment(experiment: Experiment):
     """
     Store experiment with the information into the database
     """
-    sql = "INSERT INTO Experiment (UserFK, Start, ImageTime) VALUES (%s, %s, %s)"
+    sql = "INSERT INTO Experiment (UserFK, Start, ImageTime, ExperimentName) VALUES (%s, %s, %s)"
 
-    experiment_id = execute(sql, (experiment.user, experiment.start, experiment.image_time), "INSERT")
+    experiment_id = execute(sql, (experiment.user, experiment.start, experiment.image_time, experiment.experiment_name), "INSERT")
     
     return experiment_id
 
