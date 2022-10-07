@@ -15,7 +15,7 @@ class Experiment(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id: int=None, start: datetime=None, end: datetime=None, user: int=None, image_time: str=None):  # noqa: E501
+    def __init__(self, id: int=None, start: datetime=None, end: datetime=None, user: int=None, image_time: str=None, experiment_name: str=None):  # noqa: E501
         """Experiment - a model defined in Swagger
 
         :param id: The id of this Experiment.  # noqa: E501
@@ -32,7 +32,8 @@ class Experiment(Model):
             'start': datetime,
             'end': datetime,
             'user': int,
-            'image_time': str
+            'image_time': str,
+            'experiment_name': str
         }
 
         self.attribute_map = {
@@ -40,7 +41,8 @@ class Experiment(Model):
             'start': 'start',
             'end': 'end',
             'user': 'user',
-            'image_time': 'imageTime'
+            'image_time': 'imageTime',
+            'experiment_name': 'experimentName'
         }
 
         self._id = id
@@ -48,6 +50,7 @@ class Experiment(Model):
         self._end = end
         self._user = user
         self._image_time = image_time
+        self._experiment_name = experiment_name
 
     @classmethod
     def from_dict(cls, dikt) -> 'Experiment':
@@ -166,3 +169,24 @@ class Experiment(Model):
         """
 
         self._image_time = image_time
+
+    @property
+    def experiment_name(self) -> str:
+        """Gets the experiment_name of this Experiment.
+
+
+        :return: The experiment_name of this Experiment.
+        :rtype: str
+        """
+        return self._experiment_name
+
+    @experiment_name.setter
+    def experiment_name(self, experiment_name: str):
+        """Sets the experiment_name of this Experiment.
+
+
+        :param user: The experiment_name of this Experiment.
+        :type user: str
+        """
+
+        self._experiment_name = experiment_name
