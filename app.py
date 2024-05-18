@@ -12,10 +12,10 @@ app.register_blueprint(exercises_endpoint)
 app.register_blueprint(experiments_endpoint)
 
 CORS(app)
-if app.config["ENV"] == "production":
-    app.config.from_object("config.ProductionConfig")
-else:
-    app.config.from_object("config.DevelopmentConfig")
+#if app.config["ENV"] == "production":
+app.config.from_object("config.ProductionConfig")
+#else:
+#    app.config.from_object("config.DevelopmentConfig")
 
 @app.route('/')
 def index():
